@@ -1,0 +1,10 @@
+# fastcgi_split_path_info ^(.+\.php)(/.+)$;
+# fastcgi_pass localhost:9000;
+fastcgi_index index.php;
+include fastcgi_params;
+fastcgi_cache my_zone;
+fastcgi_cache_valid 200 60m; # Only cache 200 responses, cache for 60 minutes
+fastcgi_cache_methods GET HEAD; # Only GET and HEAD methods apply
+add_header X-Fastcgi-Cache $upstream_cache_status;
+fastcgi_cache_bypass $http_cache_control;  # Don't pull from cache based on $no_cache
+fastcgi_no_cache $http_cache_control; # Don't save to cache based on $no_cache
