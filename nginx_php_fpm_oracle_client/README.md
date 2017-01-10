@@ -1,7 +1,7 @@
 # docker-nginx-php
 ## Extends shenron/nginx:1.10.2
 
-Some projects have to be hosted by a sample stand alone container with Nginx + PHP.
+Some projects have to be hosted by a sample stand alone container with Nginx + PHP 7.1.
 
 Here Oci8 dependencie has been added
 
