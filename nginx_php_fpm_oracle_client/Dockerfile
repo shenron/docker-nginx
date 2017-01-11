@@ -20,6 +20,15 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     unzip
 
+# Copy link config between PHP and Nginx
+COPY /conf/nginx/upstream.conf /etc/nginx/conf.d/upstream.conf
+COPY /conf/nginx/static-php.conf /etc/nginx/conf.d/static-php.conf
+
+# Copy base PHP config
+COPY /conf/php/php-fpm.conf /usr/local/etc/php-fpm.conf
+COPY /conf/php/php.ini /etc/php/7.1/fpm/php.ini
+COPY /conf/php/php-fpm.conf /etc/php/7.1/fpm/php-fpm.conf
+
 # install oracle client
 COPY /conf/oracle/instantclient-basic-linux.x64-12.1.0.2.0.zip /tmp/
 COPY /conf/oracle/instantclient-sdk-linux.x64-12.1.0.2.0.zip /tmp/
@@ -51,15 +60,6 @@ RUN apt-get install -y git &&\
     ./configure --disable-memcached-sasl &&\
     make &&\
     make install
-
-# Copy link config between PHP and Nginx
-COPY /conf/nginx/upstream.conf /etc/nginx/conf.d/upstream.conf
-COPY /conf/nginx/static-php.conf /etc/nginx/conf.d/static-php.conf
-
-# Copy base PHP config
-COPY /conf/php/php-fpm.conf /usr/local/etc/php-fpm.conf
-COPY /conf/php/php.ini /etc/php/7.1/fpm/php.ini
-COPY /conf/php/php-fpm.conf /etc/php/7.1/fpm/php-fpm.conf
 
 # Update PHP config
 RUN extFolder=$(php-config --extension-dir) && \
