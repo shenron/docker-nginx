@@ -61,20 +61,6 @@ RUN apt-get install -y git &&\
     make &&\
     make install
 
-# Update PHP config
-RUN extFolder=$(php-config --extension-dir) && \
-    echo "zend_extension=$extFolder/xdebug.so" >> /etc/php/7.1/fpm/php.ini
-
-RUN xdebugPath=/etc/php/7.1/fpm/conf.d/ && \
-    touch $xdebugPath/xdebug.ini; \
-    ip=$(/sbin/ip route|awk '/default/ { print $3 }') && \
-        echo "xdebug.remote_host=$ip" >> $xdebugPath/xdebug.ini; \
-    echo xdebug.remote_enable=1 >> $xdebugPath/xdebug.ini; \
-    echo xdebug.remote_autostart=0 >> $xdebugPath/xdebug.ini; \
-    echo xdebug.remote_connect_back=1 >> $xdebugPath/xdebug.ini; \
-    echo xdebug.remote_port=9000 >> $xdebugPath/xdebug.ini; \
-    echo xdebug.remote_log=/tmp/php-xdebug.log >> $xdebugPath/xdebug.ini;
-
 # Install PHPUnit
 RUN wget https://phar.phpunit.de/phpunit.phar 
 
