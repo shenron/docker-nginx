@@ -20,18 +20,12 @@ COPY /conf/nginx/upstream.conf /etc/nginx/conf.d/upstream.conf
 COPY /conf/nginx/static-php.conf /etc/nginx/conf.d/static-php.conf
 
 # Copy base PHP config
-COPY /conf/php/php-fpm.conf /usr/local/etc/php-fpm.conf
 COPY /conf/php/php.ini /etc/php5/fpm/php.ini
 COPY /conf/php/php-fpm.conf /etc/php5/fpm/php-fpm.conf
 
 # Copy link config between PHP and Nginx
 COPY /conf/nginx/upstream.conf /etc/nginx/conf.d/upstream.conf
 COPY /conf/nginx/static-php.conf /etc/nginx/conf.d/static-php.conf
-
-# Copy base PHP config
-COPY /conf/php/php-fpm.conf /usr/local/etc/php-fpm.conf
-COPY /conf/php/php.ini /etc/php/7.1/fpm/php.ini
-COPY /conf/php/php-fpm.conf /etc/php/7.1/fpm/php-fpm.conf
 
 # install oracle client
 COPY /conf/oracle/instantclient-basic-linux.x64-12.1.0.2.0.zip /tmp/
