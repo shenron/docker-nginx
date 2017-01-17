@@ -25,7 +25,6 @@ COPY /conf/nginx/upstream.conf /etc/nginx/conf.d/upstream.conf
 COPY /conf/nginx/static-php.conf /etc/nginx/conf.d/static-php.conf
 
 # Copy base PHP config
-COPY /conf/php/php-fpm.conf /usr/local/etc/php-fpm.conf
 COPY /conf/php/php.ini /etc/php/7.1/fpm/php.ini
 COPY /conf/php/php-fpm.conf /etc/php/7.1/fpm/php-fpm.conf
 
