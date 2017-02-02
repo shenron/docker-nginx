@@ -25,7 +25,6 @@ COPY /conf/nginx/upstream.conf /etc/nginx/conf.d/upstream.conf
 COPY /conf/nginx/static-php.conf /etc/nginx/conf.d/static-php.conf
 
 # Copy base PHP config
-COPY /conf/php/php-fpm.conf /usr/local/etc/php-fpm.conf
 COPY /conf/php/php.ini /etc/php/7.1/fpm/php.ini
 COPY /conf/php/php-fpm.conf /etc/php/7.1/fpm/php-fpm.conf
 
@@ -60,20 +59,6 @@ RUN apt-get install -y git &&\
     ./configure --disable-memcached-sasl &&\
     make &&\
     make install
-
-# Update PHP config
-RUN extFolder=$(php-config --extension-dir) && \
-    echo "zend_extension=$extFolder/xdebug.so" >> /etc/php/7.1/fpm/php.ini
-
-RUN xdebugPath=/etc/php/7.1/fpm/conf.d/ && \
-    touch $xdebugPath/xdebug.ini; \
-    ip=$(/sbin/ip route|awk '/default/ { print $3 }') && \
-        echo "xdebug.remote_host=$ip" >> $xdebugPath/xdebug.ini; \
-    echo xdebug.remote_enable=1 >> $xdebugPath/xdebug.ini; \
-    echo xdebug.remote_autostart=0 >> $xdebugPath/xdebug.ini; \
-    echo xdebug.remote_connect_back=1 >> $xdebugPath/xdebug.ini; \
-    echo xdebug.remote_port=9000 >> $xdebugPath/xdebug.ini; \
-    echo xdebug.remote_log=/tmp/php-xdebug.log >> $xdebugPath/xdebug.ini;
 
 # Install PHPUnit
 RUN wget https://phar.phpunit.de/phpunit.phar 
