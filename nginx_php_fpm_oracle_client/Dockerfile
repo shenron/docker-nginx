@@ -1,6 +1,8 @@
-FROM shenron/nginx:1.10.2
+FROM shenron/nginx:1.10.3
 
 MAINTAINER Thomas CASTELLY <thomas@tcy.io>
+
+ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -y \
     # For memcached
@@ -16,44 +18,36 @@ RUN apt-get update && apt-get install -y \
     wget
 
 # Copy link config between PHP and Nginx
-COPY /conf/nginx/upstream.conf /etc/nginx/conf.d/upstream.conf
-COPY /conf/nginx/static-php.conf /etc/nginx/conf.d/static-php.conf
+COPY /conf/nginx/ /etc/nginx/conf.d/
 
 # Copy base PHP config
-COPY /conf/php/php.ini /etc/php5/fpm/php.ini
-COPY /conf/php/php-fpm.conf /etc/php5/fpm/php-fpm.conf
+COPY /conf/php/ /etc/php5/fpm/
 
 # Copy link config between PHP and Nginx
-COPY /conf/nginx/upstream.conf /etc/nginx/conf.d/upstream.conf
-COPY /conf/nginx/static-php.conf /etc/nginx/conf.d/static-php.conf
+COPY /conf/nginx/ /etc/nginx/conf.d/
 
 # install oracle client
-COPY /conf/oracle/instantclient-basic-linux.x64-12.1.0.2.0.zip /tmp/
-COPY /conf/oracle/instantclient-sdk-linux.x64-12.1.0.2.0.zip /tmp/
-COPY /conf/oracle/instantclient-sqlplus-linux.x64-12.1.0.2.0.zip /tmp/
+COPY /conf/oracle/ /tmp/
 
-RUN unzip /tmp/instantclient-basic-linux.x64-12.1.0.2.0.zip -d /usr/local/
-RUN unzip /tmp/instantclient-sdk-linux.x64-12.1.0.2.0.zip -d /usr/local/
-RUN unzip /tmp/instantclient-sqlplus-linux.x64-12.1.0.2.0.zip -d /usr/local/
-
-RUN ln -s /usr/local/instantclient_12_1 /usr/local/instantclient
-RUN ln -s /usr/local/instantclient/libclntsh.so.12.1 /usr/local/instantclient/libclntsh.so
-RUN ln -s /usr/local/instantclient/sqlplus /usr/bin/sqlplus
-RUN echo 'instantclient,/usr/local/instantclient' | pecl install oci8-1.4.10
-RUN echo "extension=oci8.so" >> /etc/php5/fpm/php.ini
+RUN unzip /tmp/instantclient-basic-linux.x64-12.1.0.2.0.zip -d /usr/local/ && \
+  unzip /tmp/instantclient-sdk-linux.x64-12.1.0.2.0.zip -d /usr/local/ && \
+  unzip /tmp/instantclient-sqlplus-linux.x64-12.1.0.2.0.zip -d /usr/local/ && \
+  ln -s /usr/local/instantclient_12_1 /usr/local/instantclient && \
+  ln -s /usr/local/instantclient/libclntsh.so.12.1 /usr/local/instantclient/libclntsh.so && \
+  ln -s /usr/local/instantclient/sqlplus /usr/bin/sqlplus && \
+  echo 'instantclient,/usr/local/instantclient' | pecl install oci8-1.4.10 && \
+  echo "extension=oci8.so" >> /etc/php5/fpm/php.ini
 
 # Install other extensions
 RUN pecl install\
-    xdebug\
-    memcached\
-    zip
+  xdebug\
+  memcached-2.2.0 \
+  zip
 
 # Install PHPUnit
-RUN wget https://phar.phpunit.de/phpunit.phar 
-
-RUN chmod +x phpunit.phar
-
-RUN mv phpunit.phar /usr/local/bin/phpunit
+RUN wget https://phar.phpunit.de/phpunit.phar && \ 
+  chmod +x phpunit.phar && \
+  mv phpunit.phar /usr/local/bin/phpunit
 
 COPY /conf/entrypoint.sh /entrypoint.sh
 
