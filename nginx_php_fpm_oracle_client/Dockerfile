@@ -50,7 +50,8 @@ RUN wget https://phar.phpunit.de/phpunit.phar && \
   chmod +x phpunit.phar && \
   mv phpunit.phar /usr/local/bin/phpunit
 
-COPY /conf/entrypoint.sh /entrypoint.sh
+COPY /conf/entrypoint.sh /
+COPY /conf/entrypoint-nginx-conf.sh /
 
 ENTRYPOINT ["/entrypoint.sh"]
 
