@@ -24,6 +24,8 @@ if [ "$ENV" == "DEV" ]; then
   sed -i "s/opcache.revalidate_freq=60/opcache.revalidate_freq=0/" /etc/php/7.1/fpm/php.ini
 fi
 
+/entrypoint-nginx-conf.sh
+
 /etc/init.d/php7.1-fpm start
 
 exec "$@"
