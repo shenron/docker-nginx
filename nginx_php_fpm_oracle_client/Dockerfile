@@ -35,6 +35,7 @@ RUN unzip /tmp/instantclient-basic-linux.x64-12.1.0.2.0.zip -d /usr/local/ && \
   ln -s /usr/local/instantclient_12_1 /usr/local/instantclient && \
   ln -s /usr/local/instantclient/libclntsh.so.12.1 /usr/local/instantclient/libclntsh.so && \
   ln -s /usr/local/instantclient/sqlplus /usr/bin/sqlplus && \
+  rm /tmp/instantclient-basic-linux.x64-12.1.0.2.0.zip /tmp/instantclient-sdk-linux.x64-12.1.0.2.0.zip /tmp/instantclient-sqlplus-linux.x64-12.1.0.2.0.zip &&\
   echo 'instantclient,/usr/local/instantclient' | pecl install oci8-1.4.10 && \
   echo "extension=oci8.so" >> /etc/php5/fpm/php.ini
 
