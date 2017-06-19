@@ -33,6 +33,8 @@ COPY /conf/nginx/ /etc/nginx/conf.d/
 # install oracle client
 COPY /conf/oracle/ /tmp/
 
+ENV LD_LIBRARY_PATH="/usr/local/instantclient_12_1"
+
 RUN unzip /tmp/instantclient-basic-linux.x64-12.1.0.2.0.zip -d /usr/local/ && \
   unzip /tmp/instantclient-sdk-linux.x64-12.1.0.2.0.zip -d /usr/local/ && \
   unzip /tmp/instantclient-sqlplus-linux.x64-12.1.0.2.0.zip -d /usr/local/ && \
