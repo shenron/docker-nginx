@@ -21,6 +21,8 @@ RUN apt-get update && apt-get install -y \
     unzip \
     wget
 
+RUN mkdir -p /etc/php5/fpm/conf.d/
+
 # Copy link config between PHP and Nginx
 COPY /conf/nginx/ /etc/nginx/conf.d/
 
