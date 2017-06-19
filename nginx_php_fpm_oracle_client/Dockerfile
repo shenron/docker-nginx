@@ -21,13 +21,11 @@ RUN apt-get update && apt-get install -y \
     unzip \
     wget
 
-RUN mkdir -p /etc/php5/fpm/
-
 # Copy link config between PHP and Nginx
 COPY /conf/nginx/ /etc/nginx/conf.d/
 
 # Copy base PHP config
-COPY /conf/php/ /etc/php5/fpm/
+COPY /conf/php/ /etc/php/5.6/fpm/
 
 # Copy link config between PHP and Nginx
 COPY /conf/nginx/ /etc/nginx/conf.d/
