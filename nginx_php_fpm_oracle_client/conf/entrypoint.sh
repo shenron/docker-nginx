@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ "$ENV" == "DEV" ]; then
+if [ "$PHP_ENV" == "development" ]; then
   extFolder=$(php-config --extension-dir)
   echo "zend_extension=$extFolder/xdebug.so" >> /etc/php/7.1/fpm/php.ini
 
