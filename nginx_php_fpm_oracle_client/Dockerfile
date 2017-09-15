@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libaio-dev \
     libmemcached-dev \
-    zlib1g-dev \
+    libzip-dev \
     unzip \
     wget
 
