@@ -1,5 +1,5 @@
 # docker-nginx-php
-## Extends shenron/nginx:1.12.0
+## Extends shenron/nginx:1.12.2
 
 Some projects have to be hosted by a sample stand alone container with Nginx + PHP 7.1.
 
