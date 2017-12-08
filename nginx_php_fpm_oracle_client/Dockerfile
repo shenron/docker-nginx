@@ -63,4 +63,6 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 WORKDIR /var/www
 
-EXPOSE 80 443
+# Nginx: 80, 440
+# PHP: 900
+EXPOSE 80 443 900

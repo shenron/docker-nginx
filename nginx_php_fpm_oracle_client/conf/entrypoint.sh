@@ -4,7 +4,7 @@ if [ "$PHP_ENV" == "development" ]; then
   extFolder=$(php-config --extension-dir)
   echo "zend_extension=$extFolder/xdebug.so" >> /etc/php/5.6/fpm/php.ini
 
-  xdebugPath=/etc/php/5.6/fpm/
+  xdebugPath=/etc/php/5.6/fpm/conf.d/
   touch $xdebugPath/xdebug.ini
 
   # On linux it's possible to try to connect to the client
