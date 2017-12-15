@@ -12,9 +12,9 @@ RUN apt-get update && apt-get -y install apt-transport-https curl lsb-release ca
 RUN apt-get update && apt-get install -y \
   # For memcached
   pkg-config \ 
-  php7.1-xml \
-  php7.1-dev \
-  php7.1-fpm \
+  php7.2-xml \
+  php7.2-dev \
+  php7.2-fpm \
   php-pear \
   unzip \
   libaio-dev \
@@ -45,7 +45,7 @@ RUN unzip /tmp/instantclient-basic-linux.x64-12.1.0.2.0.zip -d /usr/local/ && \
 
 # Install other extensions
 RUN pecl install\
-  xdebug\
+  xdebug@2.6.0alpha2\
   memcached\
   zip
 
