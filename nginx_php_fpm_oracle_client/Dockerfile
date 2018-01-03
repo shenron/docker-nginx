@@ -45,7 +45,7 @@ RUN unzip /tmp/instantclient-basic-linux.x64-12.1.0.2.0.zip -d /usr/local/ && \
 
 # Install other extensions
 RUN pecl install\
-  xdebug-2.6.0alpha1\
+  xdebug-2.6.0beta1\
   memcached\
   zip
 
