@@ -1,4 +1,4 @@
-FROM nginx:1.12.2
+FROM nginx:1.14.0
 
 MAINTAINER Thomas CASTELLY <thomas@tcy.io>
 

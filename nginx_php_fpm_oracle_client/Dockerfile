@@ -1,4 +1,4 @@
-FROM shenron/nginx:1.12.2
+FROM shenron/nginx:1.14.0
 
 MAINTAINER Thomas CASTELLY <thomas@tcy.io>
 
@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y apt-transport-https lsb-release ca-cert
 
 RUN apt-get update && apt-get install -y \
     # For memcached
-    pkg-config \ 
+    pkg-config \
     php5.6-dev \
     php5.6-fpm \
     php5.6-xml \
@@ -52,7 +52,7 @@ RUN pecl install\
   zip
 
 # Install PHPUnit
-RUN wget https://phar.phpunit.de/phpunit.phar && \ 
+RUN wget https://phar.phpunit.de/phpunit.phar && \
   chmod +x phpunit.phar && \
   mv phpunit.phar /usr/local/bin/phpunit
 
