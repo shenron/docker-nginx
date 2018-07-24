@@ -1,4 +1,4 @@
-FROM shenron/nginx:1.12.2
+FROM shenron/nginx:1.14.0
 
 MAINTAINER Thomas CASTELLY <thomas@tcy.io>
 
@@ -13,7 +13,7 @@ RUN apt-get update && apt-get -y install apt-transport-https curl lsb-release ca
 
 RUN apt-get update && apt-get install -y \
   # For memcached
-  pkg-config \ 
+  pkg-config \
   php7.2-xml \
   php7.2-dev \
   php7.2-fpm \
@@ -52,7 +52,7 @@ RUN pecl install\
   zip
 
 # Install PHPUnit
-RUN wget https://phar.phpunit.de/phpunit.phar &&\ 
+RUN wget https://phar.phpunit.de/phpunit.phar &&\
   chmod +x phpunit.phar && \
   mv phpunit.phar /usr/local/bin/phpunit
 
