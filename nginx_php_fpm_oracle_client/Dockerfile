@@ -60,6 +60,7 @@ RUN set -ex \
     && phpize \
     && ./configure \
     && make \
+    && mv modules/* /usr/lib/php/20180731/ \
     && rm -rf $MEMCACHED
 
 # Install PHPUnit
