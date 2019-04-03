@@ -4,17 +4,19 @@ ARG CONFIG_VERSION=3.0.1
 
 MAINTAINER Thomas CASTELLY <thomas@tcy.io>
 
-RUN apt-get update && apt-get install -y wget
+ADD https://github.com/h5bp/server-configs-nginx/archive/${CONFIG_VERSION}.tar.gz /tmp
 
+# retrieve h5bp and restore default conf
 RUN cd /tmp && \
-  wget https://github.com/h5bp/server-configs-nginx/archive/${CONFIG_VERSION}.tar.gz &&\
+  mv /etc/nginx/conf.d/default.conf . &&\
   tar -zxvf ${CONFIG_VERSION}.tar.gz && \
-  cp -r server-configs-nginx-${CONFIG_VERSION}/* /etc/nginx/
+  cp -r server-configs-nginx-${CONFIG_VERSION}/* /etc/nginx/ &&\
+  rm -rf /etc/nginx/conf.d/* &&\
+  mv default.conf /etc/nginx/conf.d/
 
 COPY /conf/ /etc/nginx/
 
 RUN mkdir /etc/nginx/logs
-RUN touch /etc/nginx/logs/static.log
 
 RUN mkdir /tmp/nginx
 

@@ -1,5 +1,7 @@
 # fastcgi_split_path_info ^(.+\.php)(/.+)$;
 # fastcgi_pass localhost:9000;
+proxy_intercept_errors on;
+fastcgi_intercept_errors on;
 fastcgi_index index.php;
 include fastcgi_params;
 fastcgi_cache my_zone;
@@ -8,3 +10,5 @@ fastcgi_cache_methods GET HEAD; # Only GET and HEAD methods apply
 add_header X-Fastcgi-Cache $upstream_cache_status;
 fastcgi_cache_bypass $http_cache_control;  # Don't pull from cache based on $no_cache
 fastcgi_no_cache $http_cache_control; # Don't save to cache based on $no_cache
+fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+fastcgi_param SCRIPT_NAME $fastcgi_script_name;
