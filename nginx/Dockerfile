@@ -8,11 +8,13 @@ ADD https://github.com/h5bp/server-configs-nginx/archive/${CONFIG_VERSION}.tar.g
 
 # retrieve h5bp and restore default conf
 RUN cd /tmp && \
-  mv /etc/nginx/conf.d/default.conf . &&\
+  mv /etc/nginx/conf.d . &&\
   tar -zxvf ${CONFIG_VERSION}.tar.gz && \
   cp -r server-configs-nginx-${CONFIG_VERSION}/* /etc/nginx/ &&\
-  rm -rf /etc/nginx/conf.d/* &&\
-  mv default.conf /etc/nginx/conf.d/
+  rm -rf /etc/nginx/conf.d && \
+  mv /tmp/conf.d /etc/nginx &&\
+  rm -rf /tmp/server-configs-nginx-${CONFIG_VERSION} &&\
+  rm ${CONFIG_VERSION}.tar.gz
 
 COPY /conf/ /etc/nginx/
 
