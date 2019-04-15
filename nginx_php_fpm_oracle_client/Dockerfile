@@ -17,6 +17,7 @@ RUN apt-get update && apt-get install -y \
   php7.3-xml \
   php7.3-dev \
   php7.3-fpm \
+  php7.3-curl \
   php-pear \
   unzip \
   libaio-dev \
