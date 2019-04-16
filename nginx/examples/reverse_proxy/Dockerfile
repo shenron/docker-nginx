@@ -1,4 +1,4 @@
-FROM shenron/nginx:1.14.0
+FROM shenron/nginx:1.14.2
 
 MAINTAINER Thomas CASTELLY <thomas@tcy.io>
 

@@ -1,1 +1,1 @@
-Use case, sample server for deserve static files. Use gzip to compress and enable h5bp base configutation.
+Use case, sample server for deserve static files. Enable h5bp base configutation.
