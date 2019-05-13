@@ -1,4 +1,4 @@
-FROM nginx:1.14.2
+FROM nginx:1.16.0
 
 ARG CONFIG_VERSION=3.0.1
 
