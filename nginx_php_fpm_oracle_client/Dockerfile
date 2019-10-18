@@ -1,4 +1,4 @@
-FROM shenron/nginx:1.16.0
+FROM shenron/nginx:1.16.1
 
 MAINTAINER Thomas CASTELLY <thomas@tcy.io>
 
@@ -48,21 +48,9 @@ RUN unzip /tmp/instantclient-basic-linux.x64-12.2.0.1.0.zip -d /usr/local/ && \
 
 # Install other extensions
 RUN pecl install\
-  xdebug-2.7.1\
-  # memcached\
+  xdebug-2.7.2\
+  memcached\
   zip
-
-# Install memcached
-# Should be replaced by `pecl install memcached` when available with PHP 7.3
-RUN set -ex \
-    && MEMCACHED="`mktemp -d`" \
-    && curl -skL https://github.com/php-memcached-dev/php-memcached/archive/master.tar.gz | tar zxf - --strip-components 1 -C $MEMCACHED \
-    && cd $MEMCACHED \
-    && phpize \
-    && ./configure \
-    && make \
-    && mv modules/* /usr/lib/php/20180731/ \
-    && rm -rf $MEMCACHED
 
 # Install PHPUnit
 RUN wget https://phar.phpunit.de/phpunit.phar &&\
