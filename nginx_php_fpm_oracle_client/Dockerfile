@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install -y \
 COPY /conf/nginx/ /etc/nginx/conf.d/
 
 # Copy base PHP config
-COPY /conf/php/ /etc/php/7.4/fpm/
+COPY /conf/php/ /etc/php/8.0/fpm/
 
 # install oracle client
 COPY /conf/oracle/ /tmp/
@@ -39,7 +39,7 @@ RUN unzip /tmp/instantclient-basiclite-linux.x64-19.3.0.0.0dbru.zip -d /usr/loca
   rm /tmp/instantclient-basiclite-linux.x64-19.3.0.0.0dbru.zip /tmp/instantclient-sdk-linux.x64-19.3.0.0.0dbru.zip &&\
   ln -s /usr/local/instantclient_19_3 /usr/local/instantclient && \
   echo 'instantclient,/usr/local/instantclient' | pecl install oci8 && \
-  echo "extension=oci8.so" >> /etc/php/7.4/fpm/php.ini
+  echo "extension=oci8.so" >> /etc/php/8.0/fpm/php.ini
 
 
 # Install other extensions
