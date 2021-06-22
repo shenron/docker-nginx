@@ -1,4 +1,4 @@
-FROM shenron/nginx:1.18.0
+FROM shenron/nginx:1.20.1
 
 MAINTAINER Thomas CASTELLY <thomas@tcy.io>
 
@@ -14,10 +14,10 @@ RUN apt-get update && apt-get -y install apt-transport-https curl lsb-release ca
 RUN apt-get update && apt-get install -y \
   # For memcached
   pkg-config \
-  php7.4-xml \
-  php7.4-dev \
-  php7.4-fpm \
-  php7.4-curl \
+  php8.0-xml \
+  php8.0-dev \
+  php8.0-fpm \
+  php8.0-curl \
   php-pear \
   unzip \
   libaio-dev \
@@ -44,7 +44,7 @@ RUN unzip /tmp/instantclient-basiclite-linux.x64-19.3.0.0.0dbru.zip -d /usr/loca
 
 # Install other extensions
 RUN pecl install\
-  xdebug-2.9.0\
+  xdebug-3.0.0\
   memcached\
   zip
 
