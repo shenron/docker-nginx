@@ -1,6 +1,6 @@
-FROM nginx:1.18.0
+FROM nginx:1.20.1
 
-ARG CONFIG_VERSION=3.2.0
+ARG CONFIG_VERSION=3.3.0
 
 MAINTAINER Thomas CASTELLY <thomas@tcy.io>
 
