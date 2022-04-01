@@ -1,4 +1,6 @@
-FROM ghcr.io/shenron/nginx:1.20
+ARG NGINX_VERSION=1.20
+
+FROM ghcr.io/shenron/nginx:${NGINX_VERSION}
 
 MAINTAINER Thomas CASTELLY <thomas@tcy.io>
 
