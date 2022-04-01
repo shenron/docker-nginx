@@ -2,9 +2,9 @@
 
 if [ "$PHP_ENV" == "development" ]; then
   extFolder=$(php-config --extension-dir)
-  echo "zend_extension=$extFolder/xdebug.so" >> /etc/php/8.0/fpm/php.ini
+  echo "zend_extension=$extFolder/xdebug.so" >> /etc/php/8.1/fpm/php.ini
 
-  xdebugPath=/etc/php/8.0/fpm/conf.d/
+  xdebugPath=/etc/php/8.1/fpm/conf.d/
   touch $xdebugPath/xdebug.ini
 
   # On linux it's possible to try to connect to the client
@@ -21,7 +21,7 @@ if [ "$PHP_ENV" == "development" ]; then
   echo xdebug.remote_port=9000 >> $xdebugPath/xdebug.ini
   echo xdebug.remote_log=/tmp/php-xdebug.log >> $xdebugPath/xdebug.ini
 
-  sed -i "s/opcache.revalidate_freq=60/opcache.revalidate_freq=0/" /etc/php/8.0/fpm/php.ini
+  sed -i "s/opcache.revalidate_freq=60/opcache.revalidate_freq=0/" /etc/php/8.1/fpm/php.ini
 fi
 
 /entrypoint-nginx-conf.sh
