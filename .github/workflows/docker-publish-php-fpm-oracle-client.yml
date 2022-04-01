@@ -1,4 +1,4 @@
-name: php-fpm-oracle-client
+name: nginx-php-fpm-oracle-client
 
 on:
   workflow_run:
