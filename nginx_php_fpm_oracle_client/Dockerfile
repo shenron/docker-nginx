@@ -1,4 +1,4 @@
-FROM shenron/nginx:1.20.1
+FROM ghcr.io/shenron/nginx:1.20
 
 MAINTAINER Thomas CASTELLY <thomas@tcy.io>
 
@@ -14,10 +14,10 @@ RUN apt-get update && apt-get -y install apt-transport-https curl lsb-release ca
 RUN apt-get update && apt-get install -y \
   # For memcached
   pkg-config \
-  php8.0-xml \
-  php8.0-dev \
-  php8.0-fpm \
-  php8.0-curl \
+  php8.1-xml \
+  php8.1-dev \
+  php8.1-fpm \
+  php8.1-curl \
   php-pear \
   unzip \
   libaio-dev \
@@ -29,22 +29,21 @@ RUN apt-get update && apt-get install -y \
 COPY /conf/nginx/ /etc/nginx/conf.d/
 
 # Copy base PHP config
-COPY /conf/php/ /etc/php/8.0/fpm/
+COPY /conf/php/ /etc/php/8.1/fpm/
 
 # install oracle client
 COPY /conf/oracle/ /tmp/
 
-RUN unzip /tmp/instantclient-basiclite-linux.x64-19.3.0.0.0dbru.zip -d /usr/local/ && \
-  unzip /tmp/instantclient-sdk-linux.x64-19.3.0.0.0dbru.zip -d /usr/local/ && \
-  rm /tmp/instantclient-basiclite-linux.x64-19.3.0.0.0dbru.zip /tmp/instantclient-sdk-linux.x64-19.3.0.0.0dbru.zip &&\
-  ln -s /usr/local/instantclient_19_3 /usr/local/instantclient && \
-  echo 'instantclient,/usr/local/instantclient' | pecl install oci8 && \
-  echo "extension=oci8.so" >> /etc/php/8.0/fpm/php.ini
+COPY ./install_oracle_driver.sh /tmp/
 
+RUN /tmp/install_oracle_driver.sh
+
+RUN echo 'instantclient,/usr/local/instantclient' | pecl install oci8 && \
+  echo "extension=oci8.so" >> /etc/php/8.1/fpm/php.ini
 
 # Install other extensions
 RUN pecl install\
-  xdebug-3.0.0\
+  xdebug-3.1.3\
   memcached\
   zip
 
