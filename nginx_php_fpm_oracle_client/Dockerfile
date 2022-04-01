@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ENV LD_LIBRARY_PATH /usr/local/instantclient/
 
-# Force to install PHP7
+# Force to install PHP8
 RUN apt-get update && apt-get -y install apt-transport-https curl lsb-release ca-certificates wget &&\
   wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg &&\
   echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
