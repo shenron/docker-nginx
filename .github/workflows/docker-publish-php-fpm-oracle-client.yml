@@ -4,6 +4,7 @@ on:
   workflow_run:
     workflows: ["nginx"]
     types: [completed]
+    branches: [latest]
 
 env:
   IMAGE_NAME: shenron/nginx-php-fpm-oracle-client
