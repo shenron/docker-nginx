@@ -26,6 +26,6 @@ fi
 
 /entrypoint-nginx-conf.sh
 
-/etc/init.d/php8.0-fpm start
+/etc/init.d/php8.1-fpm start
 
 exec "$@"
