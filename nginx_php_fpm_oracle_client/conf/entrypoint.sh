@@ -24,6 +24,8 @@ if [ "$PHP_ENV" == "development" ]; then
   sed -i "s/opcache.revalidate_freq=60/opcache.revalidate_freq=0/" /etc/php/8.1/fpm/php.ini
 fi
 
+sed -i "s/\$MEMCACHED_HOST/$MEMCACHED_HOST/g" /etc/php/8.1/fpm/php.ini
+
 /entrypoint-nginx-conf.sh
 
 /etc/init.d/php8.1-fpm start
