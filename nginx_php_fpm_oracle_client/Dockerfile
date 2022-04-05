@@ -4,6 +4,8 @@ FROM ghcr.io/shenron/nginx:${NGINX_VERSION}
 
 MAINTAINER Thomas CASTELLY <thomas@tcy.io>
 
+ARG MEMCACHED_HOST=memcached
+
 ENV DEBIAN_FRONTEND noninteractive
 
 ENV LD_LIBRARY_PATH /usr/local/instantclient/
@@ -41,7 +43,8 @@ COPY ./install_oracle_driver.sh /tmp/
 RUN /tmp/install_oracle_driver.sh
 
 RUN echo 'instantclient,/usr/local/instantclient' | pecl install oci8 && \
-  echo "extension=oci8.so" >> /etc/php/8.1/fpm/php.ini
+  echo "extension=oci8.so" >> /etc/php/8.1/fpm/php.ini && \
+  sed -i "s/\$MEMCACHED_HOST/$MEMCACHED_HOST/g" /etc/php/8.1/fpm/php.ini
 
 # Install other extensions
 RUN pecl install\
