@@ -18,10 +18,10 @@ RUN apt-get update && apt-get -y install apt-transport-https curl lsb-release ca
 RUN apt-get update && apt-get install -y \
   # For memcached
   pkg-config \
-  php8.1-xml \
-  php8.1-dev \
-  php8.1-fpm \
-  php8.1-curl \
+  php8.2-xml \
+  php8.2-dev \
+  php8.2-fpm \
+  php8.2-curl \
   php-pear \
   unzip \
   libaio-dev \
@@ -43,11 +43,11 @@ COPY ./install_oracle_driver.sh /tmp/
 RUN /tmp/install_oracle_driver.sh
 
 RUN echo 'instantclient,/usr/local/instantclient' | pecl install oci8 && \
-  echo "extension=oci8.so" >> /etc/php/8.1/fpm/php.ini
+  echo "extension=oci8.so" >> /etc/php/8.2/fpm/php.ini
 
 # Install other extensions
 RUN pecl install\
-  xdebug-3.1.3\
+  xdebug-3.2.0\
   memcached\
   zip
 

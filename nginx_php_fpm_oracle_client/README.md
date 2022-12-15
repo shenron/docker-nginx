@@ -1,7 +1,7 @@
 # docker-nginx-php
 ## Extends ghcr.io/shenron/nginx
 
-Some projects have to be hosted by a sample stand alone container with Nginx + PHP 8.1.
+Some projects have to be hosted by a sample stand alone container with Nginx + PHP 8.2.0
 
 Here Oci8 dependencie has been added
 
