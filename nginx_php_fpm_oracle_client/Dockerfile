@@ -33,7 +33,7 @@ RUN apt-get update && apt-get install -y \
 COPY /conf/nginx/ /etc/nginx/conf.d/
 
 # Copy base PHP config
-COPY /conf/php/ /etc/php/8.1/fpm/
+COPY /conf/php/ /etc/php/8.2/fpm/
 
 # install oracle client
 COPY /conf/oracle/ /tmp/
