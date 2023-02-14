@@ -2,7 +2,7 @@ ARG NGINX_VERSION=1.22
 
 FROM ghcr.io/shenron/nginx:${NGINX_VERSION}
 
-MAINTAINER Thomas CASTELLY <thomas@tcy.io>
+MAINTAINER Thomas CASTELLY <thomas@castelly.fr>
 
 ENV MEMCACHED_HOST=memcached
 
@@ -10,7 +10,6 @@ ENV DEBIAN_FRONTEND noninteractive
 
 ENV LD_LIBRARY_PATH /usr/local/instantclient/
 
-# Force to install PHP8
 RUN apt-get update && apt-get -y install apt-transport-https curl lsb-release ca-certificates wget &&\
   wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg &&\
   echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
@@ -18,11 +17,10 @@ RUN apt-get update && apt-get -y install apt-transport-https curl lsb-release ca
 RUN apt-get update && apt-get install -y \
   # For memcached
   pkg-config \
-  php8.2-xml \
-  php8.2-dev \
-  php8.2-fpm \
-  php8.2-curl \
-  php-pear \
+  php8.0-xml \
+  php8.0-dev \
+  php8.0-fpm \
+  php8.0-curl \
   unzip \
   libaio-dev \
   libmemcached-dev \
@@ -33,7 +31,7 @@ RUN apt-get update && apt-get install -y \
 COPY /conf/nginx/ /etc/nginx/conf.d/
 
 # Copy base PHP config
-COPY /conf/php/ /etc/php/8.2/fpm/
+COPY /conf/php/ /etc/php/8.0/fpm/
 
 # install oracle client
 COPY /conf/oracle/ /tmp/
@@ -42,8 +40,8 @@ COPY ./install_oracle_driver.sh /tmp/
 
 RUN /tmp/install_oracle_driver.sh
 
-RUN echo 'instantclient,/usr/local/instantclient' | pecl install oci8 && \
-  echo "extension=oci8.so" >> /etc/php/8.2/fpm/php.ini
+RUN echo 'instantclient,/usr/local/instantclient' | pecl install oci8-3.0.1 && \
+  echo "extension=oci8.so" >> /etc/php/8.0/fpm/php.ini
 
 # Install other extensions
 RUN pecl install\
