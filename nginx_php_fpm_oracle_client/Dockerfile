@@ -1,4 +1,4 @@
-ARG NGINX_VERSION=1.22
+ARG NGINX_VERSION=1.26
 
 FROM ghcr.io/shenron/nginx:${NGINX_VERSION}
 
