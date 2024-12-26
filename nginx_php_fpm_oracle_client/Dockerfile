@@ -42,23 +42,23 @@ COPY ./install_oracle_driver.sh /tmp/
 
 RUN /tmp/install_oracle_driver.sh
 
+# Install other extensions
+RUN pecl install\
+  xdebug-3.2.0\
+  memcached\
+  zip
+
 RUN echo 'instantclient,/usr/local/instantclient' | pecl install oci8 && \
   echo "extension=oci8.so" >> /etc/php/8.2/fpm/php.ini
-#
-# # Install other extensions
-# RUN pecl install\
-#   xdebug-3.2.0\
-#   memcached\
-#   zip
-#
-# # Install PHPUnit
-# RUN wget https://phar.phpunit.de/phpunit.phar &&\
-#   chmod +x phpunit.phar && \
-#   mv phpunit.phar /usr/local/bin/phpunit
-#
-# COPY /conf/entrypoint-nginx-conf.sh /
-#
-# COPY /conf/entrypoint.sh /
+
+# Install PHPUnit
+RUN wget https://phar.phpunit.de/phpunit.phar &&\
+  chmod +x phpunit.phar && \
+  mv phpunit.phar /usr/local/bin/phpunit
+
+COPY /conf/entrypoint-nginx-conf.sh /
+
+COPY /conf/entrypoint.sh /
 
 ENTRYPOINT ["/entrypoint.sh"]
 
