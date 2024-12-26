@@ -40,7 +40,7 @@ COPY /conf/oracle/ /tmp/
 
 COPY ./install_oracle_driver.sh /tmp/
 
-RUN /tmp/install_oracle_driver.sh
+# RUN /tmp/install_oracle_driver.sh
 
 # RUN echo 'instantclient,/usr/local/instantclient' | pecl install oci8 && \
 #   echo "extension=oci8.so" >> /etc/php/8.2/fpm/php.ini
