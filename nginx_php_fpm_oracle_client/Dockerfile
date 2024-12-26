@@ -38,7 +38,7 @@ COPY /conf/php/ /etc/php/8.2/fpm/
 # install oracle client
 COPY /conf/oracle/ /tmp/
 
-COPY ./install_oracle_driver.sh /tmp/
+# COPY ./install_oracle_driver.sh /tmp/
 
 # RUN /tmp/install_oracle_driver.sh
 
