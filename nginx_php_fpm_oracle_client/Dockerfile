@@ -2,7 +2,7 @@ ARG NGINX_VERSION=1.26
 
 FROM ghcr.io/shenron/nginx:${NGINX_VERSION}
 
-MAINTAINER Thomas CASTELLY <thomas@tcy.io>
+MAINTAINER Thomas CASTELLY <thomas@castelly.fr>
 
 ENV MEMCACHED_HOST=memcached
 
