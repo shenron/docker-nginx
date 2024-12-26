@@ -14,7 +14,6 @@ env:
   IMAGE_NAME: shenron/nginx
   TARGET_PLATFORMS: linux/amd64,linux/arm64
   REGISTRY: ghcr.io
-  username: shenron
 
 jobs:
   # Push image to GitHub Packages.
@@ -47,6 +46,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ env.username }}
+          username: ${{ github.actor }}
           password: ${{ secrets.GH_TOKEN }}
 
       - name: Build and push docker
