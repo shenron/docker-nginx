@@ -1,4 +1,4 @@
-ARG NGINX_VERSION=1.26
+ARG NGINX_VERSION=1.27
 
 FROM ghcr.io/shenron/nginx:${NGINX_VERSION}
 
@@ -18,22 +18,25 @@ RUN apt-get update && apt-get -y install apt-transport-https curl lsb-release ca
 RUN apt-get update && apt-get install -y \
   # For memcached
   pkg-config \
-  php8.2-xml \
-  php8.2-dev \
-  php8.2-fpm \
-  php8.2-curl \
+  php8.4-xml \
+  php8.4-dev \
+  php8.4-fpm \
+  php8.4-curl \
   php-pear \
   unzip \
   libaio-dev \
   libmemcached-dev \
   libzip-dev \
-  unzip
+  unzip \
+  \
+  # fix pec libmemcached install
+  libssl-dev
 
 # Copy link config between PHP and Nginx
 COPY /conf/nginx/ /etc/nginx/conf.d/
 
 # Copy base PHP config
-COPY /conf/php/ /etc/php/8.2/fpm/
+COPY /conf/php/ /etc/php/8.4/fpm/
 
 # install oracle client
 COPY /conf/oracle/ /tmp/
@@ -44,12 +47,12 @@ RUN /tmp/install_oracle_driver.sh
 
 # Install other extensions
 RUN pecl install\
-  xdebug-3.2.0\
+  xdebug-3.4.2\
   memcached\
   zip
 
 RUN echo 'instantclient,/usr/local/instantclient' | pecl install oci8 && \
-  echo "extension=oci8.so" >> /etc/php/8.2/fpm/php.ini
+  echo "extension=oci8.so" >> /etc/php/8.4/fpm/php.ini
 
 # Install PHPUnit
 RUN wget https://phar.phpunit.de/phpunit.phar &&\
