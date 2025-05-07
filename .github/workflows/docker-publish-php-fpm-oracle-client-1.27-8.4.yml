@@ -1,9 +1,9 @@
-name: nginx-php-fpm-oracle-client-1.26-8.4
+name: nginx-php-fpm-oracle-client-1.27-8.4
 
 on:
   push:
     branches:
-      - 1.26-8.4
+      - 1.27-8.4
 
 env:
   IMAGE_NAME: shenron/nginx-php-fpm-oracle-client
