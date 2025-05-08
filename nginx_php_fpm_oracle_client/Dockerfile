@@ -32,6 +32,11 @@ RUN apt-get update && apt-get install -y \
   # fix pec libmemcached install
   libssl-dev
 
+# fix php log persmissions
+RUN touch /var/log/php-error.log && \
+  chown www-data:www-data /var/log/php-error.log && \
+  chmod 660 /var/log/php-error.log
+
 # Copy link config between PHP and Nginx
 COPY /conf/nginx/ /etc/nginx/conf.d/
 
